@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "BC_Bites",
-    "slug": "BC_Bites",
+    "name": "BC-Bites",
+    "slug": "BC-Bites",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/bcseal_1in_gold.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/bcseal_1in_gold.png",
         "backgroundColor": "#FFFFFF"
       }
     },
