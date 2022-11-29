@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from '@rneui/themed';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator, cardStyle } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainPage from './pages/Menus'
 
 const Stack = createNativeStackNavigator();
@@ -14,20 +14,25 @@ const theme = createTheme({
     secondary: BCGold,
   },
   components: {
-    View: {
-      style: {
-        flex: 1,
-      }
-    },
     Button: {
-      raised: true,
+      size: 'sm',
+      raised: false,
+      radius: 5,
+      containerStyle: {
+        marginVertical: 10,
+        marginHorizontal: 5,
+      },
     },
     Header: {alignItems: 'center',   width: '100%',
         paddingVertical: 10,
     },
     Text: {
       style:{
-        fontFamily: Platform.OS === 'ios' ? 'Menlo-Bold' : '',
+        fontFamily: Platform.OS === 'ios' ? 'System' : '',
+      },
+      h2Style: {
+        color: 'black',
+        fontSize: 25
       },
       h3Style: {
         color: 'white',
@@ -35,7 +40,7 @@ const theme = createTheme({
       },
       h4Style: {
         color: 'black',
-        fontSize: 12,
+        fontSize: 15,
       }
     },
     Icon: {
@@ -52,7 +57,7 @@ const theme = createTheme({
         width: 100,
       },
       titleStyle: {
-        fontFamily: Platform.OS === 'ios' ? 'Menlo-Bold' : '',
+        fontFamily: Platform.OS === 'ios' ? 'System' : '',
       }
     },
     Divider: {
@@ -68,7 +73,7 @@ const theme = createTheme({
     },
     CardTitle: {
       style:{
-        fontFamily: Platform.OS === 'ios' ? 'Menlo-Bold' : '',
+        fontFamily: Platform.OS === 'ios' ? 'System' : '',
       },
     },
     Image: {
