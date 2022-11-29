@@ -61,7 +61,7 @@ const theme = createTheme({
       }
     },
     Divider: {
-      color: BCRed,
+      color: BCGold,
       width: 3,
       orientation: 'horizontal',
     },

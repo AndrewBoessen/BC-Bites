@@ -58,6 +58,7 @@ const DiningHallChip = (props) => {
 }
 
 const TopChoice = (props) => {
+
     return(
         <View style = {{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
             <Text h2 style = {{marginVertical: 5}}>Today's Top Choice: {props.name}</Text>
@@ -73,8 +74,11 @@ const TopChoice = (props) => {
     ); 
 }
 
-const MenuItem = ({item}) => {
-    return(
+const MenuItems = (props) => {
+
+    const [upPressed, setUpPressed] = useState(false);
+
+    const renderCard = ({item}) => (
         <Card>
             <Card.Title>{item.name}</Card.Title>
             <Card.Divider/>
@@ -105,7 +109,15 @@ const MenuItem = ({item}) => {
                 </View>
             </View>
         </Card>
+    )
+
+    return(
+        <FlatList
+            data = {DATA}
+            renderItem = {renderCard}
+        />
     );
+    
 }
 
 const MainPage = (props) => {
@@ -130,12 +142,9 @@ const MainPage = (props) => {
                     img = {'https://via.placeholder.com/80'}
                 />
                 <Divider/>
-                <View style={{flex: 1}}>
-                    <FlatList
-                        data = {DATA}
-                        renderItem = {MenuItem}
-                    />
-                </View>
+                <View style = {{flex: 1}}>
+                    <MenuItems/>
+                </View> 
             </View>
         </SafeAreaProvider>
     );
