@@ -36,7 +36,7 @@ const theme = createTheme({
       },
       h3Style: {
         color: 'white',
-        fontSize: 22,
+        fontSize: 20,
       },
       h4Style: {
         color: 'black',
@@ -78,8 +78,8 @@ const theme = createTheme({
     },
     Image: {
       containerStyle:{
-        width: 80,
-        height: 80,
+        width: 100,
+        height: 100,
         marginHorizontal: 10,
       }
     }

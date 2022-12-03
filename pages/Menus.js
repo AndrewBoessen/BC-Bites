@@ -8,43 +8,43 @@ import { LinearGradient } from 'expo-linear-gradient'
 const DATA = [
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/80',
+        img: 'https://via.placeholder.com/100',
         hall: 'lower',
         id: 1,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/80',
+        img: 'https://via.placeholder.com/100',
         hall: 'lower',
         id: 2,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/80',
+        img: 'https://via.placeholder.com/100',
         hall: 'lower',
         id: 3,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/80',
+        img: 'https://via.placeholder.com/100',
         hall: 'lower',
         id: 4,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/80',
+        img: 'https://via.placeholder.com/100',
         hall: 'lower',
         id: 5,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/80',
+        img: 'https://via.placeholder.com/100',
         hall: 'lower',
         id: 6,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/80',
+        img: 'https://via.placeholder.com/100',
         hall: 'lower',
         id: 7,
     },
@@ -69,11 +69,12 @@ const TopChoice = (props) => {
     return(
         <View style = {{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
             <Text h2 style = {{marginVertical: 5}}>Today's Top Choice: {props.name}</Text>
-            <Divider style = {{width: '80%', borderRadius: 5}} inset = {true} insetType = 'middle'/>
+            <Divider style = {{width: '100%', borderRadius: 5}} inset = {true} insetType = 'middle'/>
             <View style = {{marginVertical: 10, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
                 <Image
                     source = {{uri : props.img}}
-                    PlaceholderContent = {<Skeleton LinearGradientComponent={LinearGradient} animation = "pulse" width={80} height={80}/>}
+                    containerStyle = {{borderRadius: 10,}}
+                    PlaceholderContent = {<Skeleton LinearGradientComponent={LinearGradient} animation = "pulse" width={100} height={100}/>}
                 />
                 <Text h4>Votes: 10</Text>
             </View>
@@ -88,21 +89,22 @@ const MenuItems = () => {
 
     const renderCard = ({item}) => (
         <Card>
-            <Card.Title>{item.name}</Card.Title>
+            <Card.Title h4>{item.name}</Card.Title>
             <Card.Divider/>
-            <View style = {{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
+            <View style = {{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center',}}>
                 <Image
                     source = {{uri : item.img}}
-                    PlaceholderContent = {<Skeleton LinearGradientComponent={LinearGradient} animation = "wave" width={80} height={80}/>}
+                    containerStyle = {{borderRadius: 10}}
+                    PlaceholderContent = {<Skeleton LinearGradientComponent={LinearGradient} animation = "wave" width={100} height={100}/>}
                 />
-                <Text h4>Dining Hall: {item.hall}</Text>
+                {/*<Text h4>Dining Hall: {item.hall}</Text>*/}
                 <View style = {{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
                     <Button
                         type = {upPressed.includes(item.id) ? 'solid' : 'outline'}
                         icon = {{
                             name: 'keyboard-arrow-up',
-                            size: 20,
-                            color: 'black',
+                            size: 30,
+                            color: upPressed.includes(item.id) ? 'white': '#8a100b',
                         }}
                         onPress = {() => {
                             let isPressed = upPressed.includes(item.id);
@@ -114,13 +116,13 @@ const MenuItems = () => {
                             setDownPressed(downPressed.filter((id) => id !== item.id));
                         }}
                     />
-                    <Text h4>0</Text>
+                    <Text h3 h3Style={{color: 'black'}}>0</Text>
                     <Button
                         type = {downPressed.includes(item.id) ? 'solid' : 'outline'}
                         icon = {{
                             name: 'keyboard-arrow-down',
-                            size: 20,
-                            color: 'black',
+                            size: 30,
+                            color: downPressed.includes(item.id) ? 'white': '#8a100b',
                         }}
                         onPress = {() => {
                             let isPressed = downPressed.includes(item.id);
@@ -165,7 +167,7 @@ const MainPage = (props) => {
                 <Divider/>
                 <TopChoice
                     name = {'BC Burger'}
-                    img = {'https://via.placeholder.com/80'}
+                    img = {'https://via.placeholder.com/100'}
                 />
                 <Divider/>
                 <View style = {{flex: 1}}>
