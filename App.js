@@ -1,6 +1,7 @@
 import { ThemeProvider, createTheme } from '@rneui/themed';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useFonts } from 'expo-font';
 import MainPage from './pages/Menus'
 
 const Stack = createNativeStackNavigator();
@@ -28,7 +29,7 @@ const theme = createTheme({
     },
     Text: {
       style:{
-        fontFamily: Platform.OS === 'ios' ? 'System' : '',
+        fontFamily: 'Open-Sans',
       },
       h2Style: {
         color: 'black',
@@ -57,11 +58,11 @@ const theme = createTheme({
         width: 100,
       },
       titleStyle: {
-        fontFamily: Platform.OS === 'ios' ? 'System' : '',
+        fontFamily: 'Open-Sans',
       }
     },
     Divider: {
-      color: BCGold,
+      color: BCRed,
       width: 3,
       orientation: 'horizontal',
     },
@@ -78,7 +79,7 @@ const theme = createTheme({
     },
     Image: {
       containerStyle:{
-        width: 100,
+        width: 200,
         height: 100,
         marginHorizontal: 10,
       }
@@ -88,6 +89,11 @@ const theme = createTheme({
 
 // Your App
 const App = () => {
+
+  const [fontsLoaded] = useFonts({
+    'Open-Sans': require('./assets/OpenSans-VariableFont_wdth,wght.ttf'),
+  });
+  
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>

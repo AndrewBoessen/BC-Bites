@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import { Text, Skeleton, Image, Header, Icon, Chip, Divider, useTheme, Card, Button } from '@rneui/themed';
-import { View, FlatList } from 'react-native';
+import { Text, Skeleton, Image, Header, Icon, Chip, Divider, useTheme, Card, Button, AirbnbRating } from '@rneui/themed';
+import { View, FlatList, ImageEditor } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient'
@@ -8,44 +8,58 @@ import { LinearGradient } from 'expo-linear-gradient'
 const DATA = [
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/100',
+        img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
         hall: 'lower',
+        rating: 2,
+        price: 10,
         id: 1,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/100',
+        img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
         hall: 'lower',
+        rating: 2,
+        price: 10,
         id: 2,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/100',
+        img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
         hall: 'lower',
+        rating: 2,
+        price: 10,
         id: 3,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/100',
+        img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
         hall: 'lower',
+        rating: 2,
+        price: 10,
         id: 4,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/100',
+        img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
         hall: 'lower',
+        rating: 2,
+        price: 10,
         id: 5,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/100',
+        img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
         hall: 'lower',
+        rating: 2,
+        price: 10,
         id: 6,
     },
     {
         name: "Chicken & 2 Sides",
-        img: 'https://via.placeholder.com/100',
+        img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
         hall: 'lower',
+        rating: 2,
+        price: 10,
         id: 7,
     },
 ];
@@ -84,65 +98,30 @@ const TopChoice = (props) => {
 
 const MenuItems = () => {
 
-    const [upPressed, setUpPressed] = useState([]);
-    const [downPressed, setDownPressed] = useState([]);
-
-    const renderCard = ({item}) => (
-        <Card>
-            <Card.Title h4>{item.name}</Card.Title>
-            <Card.Divider/>
-            <View style = {{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center',}}>
-                <Image
-                    source = {{uri : item.img}}
-                    containerStyle = {{borderRadius: 10}}
-                    PlaceholderContent = {<Skeleton LinearGradientComponent={LinearGradient} animation = "wave" width={100} height={100}/>}
+    const renderFood = ({item}) => (
+        <View style = {{height: 200, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginVertical: 10, marginHorizontal: 10,}}>
+            <Text h3 h3Style = {{color: 'black', borderWidth: 3, borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5,}}>{item.name}</Text>
+            <Image
+                source = {{uri: item.img}}
+                containerStyle = {{borderRadius: 15}}
+            />
+            <View style = {{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderWidth: 3, borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5, }}>
+                <AirbnbRating
+                    size = {20} 
+                    isDisabled = {true}
+                    showRating = {false}
+                    defaultRating = {item.rating}
                 />
-                {/*<Text h4>Dining Hall: {item.hall}</Text>*/}
-                <View style = {{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                    <Button
-                        type = {upPressed.includes(item.id) ? 'solid' : 'outline'}
-                        icon = {{
-                            name: 'keyboard-arrow-up',
-                            size: 30,
-                            color: upPressed.includes(item.id) ? 'white': '#8a100b',
-                        }}
-                        onPress = {() => {
-                            let isPressed = upPressed.includes(item.id);
-                            if (isPressed) {
-                                setUpPressed(upPressed.filter((id) => id !== item.id));
-                            }else{
-                                setUpPressed([item.id, ...upPressed]);
-                            }
-                            setDownPressed(downPressed.filter((id) => id !== item.id));
-                        }}
-                    />
-                    <Text h3 h3Style={{color: 'black'}}>0</Text>
-                    <Button
-                        type = {downPressed.includes(item.id) ? 'solid' : 'outline'}
-                        icon = {{
-                            name: 'keyboard-arrow-down',
-                            size: 30,
-                            color: downPressed.includes(item.id) ? 'white': '#8a100b',
-                        }}
-                        onPress = {() => {
-                            let isPressed = downPressed.includes(item.id);
-                            if (isPressed) {
-                                setDownPressed(downPressed.filter((id) => id !== item.id));
-                            }else{
-                                setDownPressed([item.id, ...downPressed]);
-                            }
-                            setUpPressed(upPressed.filter((id) => id !== item.id));
-                        }}
-                    />
-                </View>
+                <Text h3 h3Style = {{color: 'black', marginLeft: 20}}>${item.price}</Text>
             </View>
-        </Card>
+        </View>
     )
 
     return(
         <FlatList
+            horizontal = {true}
             data = {DATA}
-            renderItem = {renderCard}
+            renderItem = {renderFood}
         />
     );
     
@@ -165,14 +144,20 @@ const MainPage = (props) => {
                     <DiningHallChip Name = {"Stuart"}/>
                 </View>
                 <Divider/>
+                <Text h2 h2Style = {{marginHorizontal: 10, marginTop: 10,}}>Popular</Text>
+                {/*
+                <Divider/>
+                
                 <TopChoice
                     name = {'BC Burger'}
-                    img = {'https://via.placeholder.com/100'}
+                    img = {'https://via.placeholder.com/200x100'}
                 />
+                
                 <Divider/>
+                */}
                 <View style = {{flex: 1}}>
                     <MenuItems/>
-                </View> 
+                </View>
             </View>
         </SafeAreaProvider>
     );
