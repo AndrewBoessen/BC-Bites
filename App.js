@@ -29,7 +29,7 @@ const theme = createTheme({
     },
     Text: {
       style:{
-        fontFamily: 'Open-Sans',
+        fontFamily: 'System',
       },
       h2Style: {
         color: 'black',
@@ -58,7 +58,7 @@ const theme = createTheme({
         width: 100,
       },
       titleStyle: {
-        fontFamily: 'Open-Sans',
+        fontFamily: 'System',
       }
     },
     Divider: {
@@ -89,10 +89,6 @@ const theme = createTheme({
 
 // Your App
 const App = () => {
-
-  const [fontsLoaded] = useFonts({
-    'Open-Sans': require('./assets/OpenSans-VariableFont_wdth,wght.ttf'),
-  });
   
   return (
     <ThemeProvider theme={theme}>

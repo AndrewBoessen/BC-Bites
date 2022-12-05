@@ -5,13 +5,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient'
 
+const BCRed = '#8a100b';
+const BCGold = '#b29d6c';
+
 const DATA = [
     {
         name: "Chicken & 2 Sides",
         img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
         hall: 'lower',
         rating: 2,
-        price: 10,
+        price: 10.5,
         id: 1,
     },
     {
@@ -99,20 +102,20 @@ const TopChoice = (props) => {
 const MenuItems = () => {
 
     const renderFood = ({item}) => (
-        <View style = {{height: 200, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginVertical: 10, marginHorizontal: 10,}}>
-            <Text h3 h3Style = {{color: 'black', borderWidth: 3, borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5,}}>{item.name}</Text>
+        <View style = {{height: 200, backgroundColor: BCRed, borderRadius: 15, overflow: 'hidden', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', marginVertical: 10, marginHorizontal: 5,}}>
+            <Text h3 h3Style = {{borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5,}}>{item.name}</Text>
             <Image
                 source = {{uri: item.img}}
                 containerStyle = {{borderRadius: 15}}
             />
-            <View style = {{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderWidth: 3, borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5, }}>
+            <View style = {{width: 200, marginVertical: 8, flexDirection: 'row',  backgroundColor: 'white', overflow: 'hidden', justifyContent: 'space-evenly', alignItems: 'center', borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5, }}>
                 <AirbnbRating
-                    size = {20} 
+                    size = {18} 
                     isDisabled = {true}
                     showRating = {false}
                     defaultRating = {item.rating}
                 />
-                <Text h3 h3Style = {{color: 'black', marginLeft: 20}}>${item.price}</Text>
+                <Text h3 h3Style = {{color: 'black'}}>${item.price}</Text>
             </View>
         </View>
     )
@@ -144,7 +147,7 @@ const MainPage = (props) => {
                     <DiningHallChip Name = {"Stuart"}/>
                 </View>
                 <Divider/>
-                <Text h2 h2Style = {{marginHorizontal: 10, marginTop: 10,}}>Popular</Text>
+                <Text h2 h2Style = {{marginHorizontal: 10, marginTop: 10}}>Popular</Text>
                 {/*
                 <Divider/>
                 
