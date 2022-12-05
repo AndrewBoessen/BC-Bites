@@ -18,7 +18,7 @@ const theme = createTheme({
     Button: {
       size: 'sm',
       raised: false,
-      radius: 5,
+      radius: 15,
       containerStyle: {
         marginVertical: 10,
         marginHorizontal: 5,

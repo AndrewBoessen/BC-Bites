@@ -147,7 +147,12 @@ const MainPage = (props) => {
                     <DiningHallChip Name = {"Stuart"}/>
                 </View>
                 <Divider/>
-                <Text h2 h2Style = {{marginHorizontal: 10, marginTop: 10}}>Popular</Text>
+                <Button
+                    title={'Rate Your Meal'}
+                    size={'md'}
+                    titleStyle={{fontSize:25}}
+                    
+                />    
                 {/*
                 <Divider/>
                 
@@ -158,9 +163,10 @@ const MainPage = (props) => {
                 
                 <Divider/>
                 */}
-                <View style = {{flex: 1}}>
-                    <MenuItems/>
-                </View>
+                <Text h2 h2Style = {{marginHorizontal: 10, marginTop: 10}}>Popular</Text>
+                <MenuItems/>
+                <Text h2 h2Style = {{marginHorizontal: 10, marginTop: 10}}>Cheapest</Text>
+                <MenuItems/>
             </View>
         </SafeAreaProvider>
     );
