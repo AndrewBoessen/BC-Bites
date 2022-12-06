@@ -85,13 +85,53 @@ const DiningHallChip = (props) => {
 const MenuItems = () => {
 
     const renderFood = ({item}) => (
-        <View style = {{backgroundColor: BCRed, borderRadius: 15, overflow: 'hidden', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', marginVertical: 10, marginHorizontal: 5,}}>
+        <View
+            style = {{
+                backgroundColor: BCRed, 
+                borderRadius: 15, 
+                flexDirection: 'column', 
+                justifyContent: 'space-evenly', 
+                alignItems: 'center', 
+                marginVertical: 10, 
+                marginHorizontal: 5,
+                shadowColor: "#000",
+                shadowOffset: {
+                	width: 0,
+                	height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+
+                elevation: 5,
+            }}
+        >
             <Text h3 h3Style = {{borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5,}}>{item.name}</Text>
             <Image
                 source = {{uri: item.img}}
-                containerStyle = {{borderRadius: 15}}
+                containerStyle = {{borderRadius: 15,}}
             />
-            <View style = {{width: 200, marginVertical: 8, flexDirection: 'row',  backgroundColor: 'white', overflow: 'hidden', justifyContent: 'space-evenly', alignItems: 'center', borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5, }}>
+            <View 
+                style = {{
+                    width: 200, 
+                    marginVertical: 8, 
+                    flexDirection: 'row',  
+                    backgroundColor: 'white', 
+                    justifyContent: 'space-evenly', 
+                    alignItems: 'center', 
+                    borderRadius: 15, 
+                    paddingVertical: 5, 
+                    paddingHorizontal: 5, 
+                    shadowColor: "#000",
+                    shadowOffset: {
+                    	width: 0,
+                    	height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+
+                    elevation: 5,
+                }}
+            >
                 <AirbnbRating
                     size = {18} 
                     isDisabled = {true}
@@ -116,26 +156,46 @@ const MenuItems = () => {
 
 const MainPage = (props) => {
     const {theme, updateTheme} = useTheme();
+
     return(
         <SafeAreaProvider>
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, backgroundColor: theme.colors.background}}>
                 <View>
                     <Header
                         leftComponent= {<Icon name = 'tune' type = 'material'/>}
-                        centerComponent = {<Text h3>BC-Bites</Text>}
+                        leftContainerStyle = {{justifyContent: 'center'}}
+
+                        centerComponent = {<Text h2 h2Style = {{color: 'white'}}>BC-Bites</Text>}
+                        centerContainerStyle = {{justifyContent: 'center'}}
+
                         rightComponent= {<Icon name = 'settings' type = 'material'/>}
+                        rightContainerStyle = {{justifyContent: 'center'}}
                     />
                 </View>
-                <View style = {{flexDirection: 'row', justifyContent: 'center'}}>
+                <View 
+                    style = {{
+                        flexDirection: 'row', 
+                        justifyContent: 'center',
+                        shadowColor: "#000",
+                        shadowOffset: {
+                        	width: 0,
+                        	height: 2,
+                        },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 3.84,
+
+                        elevation: 5,
+                    }}
+                >
                     <DiningHallChip Name = {"Lower"} startSelcted/>
                     <DiningHallChip Name = {"Carney's"}/>
                     <DiningHallChip Name = {"Stuart"}/>
                 </View>
-                <Divider/>
                 <Button
                     title={'Rate Your Meal'}
                     size={'md'}
                     titleStyle={{fontSize:25}}
+                    raised={true}
                     icon = {
                         <Icon
                             name = "food"

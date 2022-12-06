@@ -1,4 +1,4 @@
-import { ThemeProvider, createTheme } from '@rneui/themed';
+import { ThemeProvider, createTheme, useTheme } from '@rneui/themed';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
@@ -13,6 +13,7 @@ const theme = createTheme({
   colors: {
     primary: BCRed,
     secondary: BCGold,
+    background: 'white'
   },
   components: {
     Button: {
@@ -89,7 +90,11 @@ const theme = createTheme({
 
 // Your App
 const App = () => {
-  
+
+  const [fontsLoaded] = useFonts({
+    'Open-Sans': require('./assets/static/OpenSans/OpenSans-Regular.ttf'),
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
