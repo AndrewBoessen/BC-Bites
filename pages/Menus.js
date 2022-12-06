@@ -191,6 +191,7 @@ const MainPage = (props) => {
                     <DiningHallChip Name = {"Carney's"}/>
                     <DiningHallChip Name = {"Stuart"}/>
                 </View>
+                <Divider/>
                 <Button
                     title={'Rate Your Meal'}
                     size={'md'}
@@ -216,12 +217,45 @@ const MainPage = (props) => {
                 
                 <Divider/>
                 */}
-                <Text h2 h2Style = {{marginHorizontal: 10, marginTop: 10}}>Popular</Text>
-                <MenuItems/>
-                <Text h2 h2Style = {{marginHorizontal: 10, marginTop: 10}}>Cheapest</Text>
-                <MenuItems/>
-                <View style = {{height: 100}}>
+                <Text h2 h2Style = {{
+                        marginHorizontal: 10, 
+                        marginTop: 10, 
+                        shadowColor: "#000",
+                        shadowOffset: {
+                        	width: 0,
+                        	height: 2,
+                        },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 3.84,
 
+                        elevation: 5,}}>Popular</Text>
+                <MenuItems/>
+                <Text h2 h2Style = {{
+                        marginHorizontal: 10, 
+                        marginTop: 10, 
+                        shadowColor: "#000",
+                        shadowOffset: {
+                        	width: 0,
+                        	height: 2,
+                        },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 3.84,
+
+                        elevation: 5,}}>Cheapest</Text>
+                <MenuItems/>
+                <View style = {{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', height: 70, backgroundColor: '#b7b3a5', marginTop: 30, borderRadius: 5}}>
+                    <Icon
+                        name = "home"
+                        size = {40}
+                        type = "material"
+                        containerStyle = {{marginRight: 70, marginBottom: 10}}
+                    />
+                    <Icon
+                        name = "notifications"
+                        size = {40}
+                        type = "material"
+                        containerStyle = {{marginLeft: 70, marginBottom: 10}}
+                    />
                 </View>
             </View>
         </SafeAreaProvider>
