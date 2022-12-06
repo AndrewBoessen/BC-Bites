@@ -73,6 +73,7 @@ const DiningHallChip = (props) => {
     return(
         <Chip 
             title = {props.Name} 
+            titleStyle={{fontSize:15}}
             type = {selected ? 'solid' : 'outline'}
             onPress = {() =>{
                 setSelected(!selected);
@@ -81,28 +82,10 @@ const DiningHallChip = (props) => {
     );
 }
 
-const TopChoice = (props) => {
-
-    return(
-        <View style = {{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-            <Text h2 style = {{marginVertical: 5}}>Today's Top Choice: {props.name}</Text>
-            <Divider style = {{width: '100%', borderRadius: 5}} inset = {true} insetType = 'middle'/>
-            <View style = {{marginVertical: 10, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
-                <Image
-                    source = {{uri : props.img}}
-                    containerStyle = {{borderRadius: 10,}}
-                    PlaceholderContent = {<Skeleton LinearGradientComponent={LinearGradient} animation = "pulse" width={100} height={100}/>}
-                />
-                <Text h4>Votes: 10</Text>
-            </View>
-        </View>
-    ); 
-}
-
 const MenuItems = () => {
 
     const renderFood = ({item}) => (
-        <View style = {{height: 200, backgroundColor: BCRed, borderRadius: 15, overflow: 'hidden', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', marginVertical: 10, marginHorizontal: 5,}}>
+        <View style = {{backgroundColor: BCRed, borderRadius: 15, overflow: 'hidden', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', marginVertical: 10, marginHorizontal: 5,}}>
             <Text h3 h3Style = {{borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5,}}>{item.name}</Text>
             <Image
                 source = {{uri: item.img}}
@@ -122,6 +105,7 @@ const MenuItems = () => {
 
     return(
         <FlatList
+            contentContainerStyle = {{height: 220}}
             horizontal = {true}
             data = {DATA}
             renderItem = {renderFood}
@@ -137,8 +121,9 @@ const MainPage = (props) => {
             <View style={{flex: 1}}>
                 <View>
                     <Header
-                        leftComponent= {<Icon name = 'menu'/>}
+                        leftComponent= {<Icon name = 'tune' type = 'material'/>}
                         centerComponent = {<Text h3>BC-Bites</Text>}
+                        rightComponent= {<Icon name = 'settings' type = 'material'/>}
                     />
                 </View>
                 <View style = {{flexDirection: 'row', justifyContent: 'center'}}>
@@ -151,8 +136,16 @@ const MainPage = (props) => {
                     title={'Rate Your Meal'}
                     size={'md'}
                     titleStyle={{fontSize:25}}
+                    icon = {
+                        <Icon
+                            name = "food"
+                            size = {28}
+                            type = "material-community"
+                            containerStyle = {{marginRight: 10}}
+                        />
+                    }
                     
-                />    
+                />
                 {/*
                 <Divider/>
                 
@@ -167,6 +160,9 @@ const MainPage = (props) => {
                 <MenuItems/>
                 <Text h2 h2Style = {{marginHorizontal: 10, marginTop: 10}}>Cheapest</Text>
                 <MenuItems/>
+                <View style = {{height: 100}}>
+
+                </View>
             </View>
         </SafeAreaProvider>
     );
