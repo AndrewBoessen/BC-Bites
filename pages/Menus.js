@@ -12,56 +12,63 @@ const DATA = [
     {
         name: "Chicken & 2 Sides",
         img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
-        hall: 'lower',
+        hall: 'Lower',
         rating: 2,
+        votes: 10,
         price: 10.5,
         id: 1,
     },
     {
         name: "Chicken & 2 Sides",
         img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
-        hall: 'lower',
+        hall: 'Lower',
         rating: 2,
+        votes: 10,
         price: 10,
         id: 2,
     },
     {
         name: "Chicken & 2 Sides",
         img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
-        hall: 'lower',
+        hall: 'Lower',
         rating: 2,
+        votes: 10,
         price: 10,
         id: 3,
     },
     {
         name: "Chicken & 2 Sides",
         img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
-        hall: 'lower',
+        hall: 'Lower',
         rating: 2,
+        votes: 10,
         price: 10,
         id: 4,
     },
     {
         name: "Chicken & 2 Sides",
         img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
-        hall: 'lower',
+        hall: 'Lower',
         rating: 2,
+        votes: 10,
         price: 10,
         id: 5,
     },
     {
         name: "Chicken & 2 Sides",
         img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
-        hall: 'lower',
+        hall: 'Lower',
         rating: 2,
+        votes: 10,
         price: 10,
         id: 6,
     },
     {
         name: "Chicken & 2 Sides",
         img: 'https://thekitchencommunity.org/wp-content/uploads/2021/11/Side-Dishes-for-Chicken-1200x900.jpg',
-        hall: 'lower',
+        hall: 'Lower',
         rating: 2,
+        votes: 10,
         price: 10,
         id: 7,
     },
@@ -82,12 +89,41 @@ const DiningHallChip = (props) => {
     );
 }
 
+const Favorites = () => {
+
+    const {theme, updateTheme} = useTheme();
+
+    return(
+        <View
+            style = {{
+                flex: 1,
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 15,
+            }}
+        >
+            <View
+                stlye = {{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                    borderRaduis: 15,
+                }}
+            >
+                <Icon/>
+                <Text h3>Favorites</Text>
+            </View>
+        </View>
+    );
+}
+
 const MenuItems = () => {
 
     const renderFood = ({item}) => (
         <View
             style = {{
-                backgroundColor: BCRed, 
+                backgroundColor: BCRed,
                 borderRadius: 15, 
                 flexDirection: 'column', 
                 justifyContent: 'space-evenly', 
@@ -114,7 +150,7 @@ const MenuItems = () => {
                 style = {{
                     width: 200, 
                     marginVertical: 8, 
-                    flexDirection: 'row',  
+                    flexDirection: 'column',  
                     backgroundColor: 'white', 
                     justifyContent: 'space-evenly', 
                     alignItems: 'center', 
@@ -132,20 +168,42 @@ const MenuItems = () => {
                     elevation: 5,
                 }}
             >
-                <AirbnbRating
-                    size = {18} 
-                    isDisabled = {true}
-                    showRating = {false}
-                    defaultRating = {item.rating}
-                />
-                <Text h3 h3Style = {{color: 'black'}}>${item.price}</Text>
+                <View
+                    style = {{
+                        width: 200,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <AirbnbRating
+                        size = {20} 
+                        isDisabled = {true}
+                        showRating = {false}
+                        defaultRating = {item.rating}
+                    />
+                    <Text h4 h4Style = {{color: 'black', fontSize: 15,}}>({item.votes})</Text>
+                </View>
+                <View 
+                    style = {{
+                        width: 200,
+                        flexDirection: 'row',
+                        justifyContent: 'space-evenly',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Text h4 h4Style = {{color: 'black'}}>{item.hall}</Text>
+                    <Text h4 h4Style = {{color: 'black'}}>${item.price}</Text>
+                </View>
+                
+                
             </View>
         </View>
     )
 
     return(
         <FlatList
-            contentContainerStyle = {{height: 220}}
+            contentContainerStyle = {{height: 230}}
             horizontal = {true}
             data = {DATA}
             renderItem = {renderFood}
@@ -191,22 +249,7 @@ const MainPage = (props) => {
                     <DiningHallChip Name = {"Carney's"}/>
                     <DiningHallChip Name = {"Stuart"}/>
                 </View>
-                <Divider/>
-                <Button
-                    title={'Rate Your Meal'}
-                    size={'md'}
-                    titleStyle={{fontSize:25}}
-                    raised={true}
-                    icon = {
-                        <Icon
-                            name = "food"
-                            size = {28}
-                            type = "material-community"
-                            containerStyle = {{marginRight: 10}}
-                        />
-                    }
-                    
-                />
+                {/*ADD USER FAVORITE ITEMS AVAILIBEL TODAY */}
                 {/*
                 <Divider/>
                 
@@ -243,7 +286,22 @@ const MainPage = (props) => {
 
                         elevation: 5,}}>Cheapest</Text>
                 <MenuItems/>
-                <View style = {{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', height: 70, backgroundColor: '#b7b3a5', marginTop: 30, borderRadius: 5}}>
+                <Button
+                    title={'Rate Your Meal'}
+                    size={'md'}
+                    titleStyle={{fontSize:25}}
+                    raised={true}
+                    icon = {
+                        <Icon
+                            name = "food"
+                            size = {28}
+                            type = "material-community"
+                            containerStyle = {{marginRight: 10}}
+                        />
+                    }
+                    
+                />
+                <View style = {{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', height: 70, backgroundColor: '#b7b3a5', borderRadius: 5, marginTop: 10,}}>
                     <Icon
                         name = "home"
                         size = {40}
@@ -251,7 +309,7 @@ const MainPage = (props) => {
                         containerStyle = {{marginRight: 70, marginBottom: 10}}
                     />
                     <Icon
-                        name = "notifications"
+                        name = "star"
                         size = {40}
                         type = "material"
                         containerStyle = {{marginLeft: 70, marginBottom: 10}}

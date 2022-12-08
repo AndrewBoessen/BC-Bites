@@ -13,7 +13,10 @@ const theme = createTheme({
   colors: {
     primary: BCRed,
     secondary: BCGold,
-    background: 'white'
+    darkBackground: '#000000',
+    surface: '#121212',
+    onPrimary: '#000000',
+    onSecondary: '#000000',
   },
   components: {
     Button: {
@@ -42,7 +45,7 @@ const theme = createTheme({
       },
       h4Style: {
         color: 'black',
-        fontSize: 15,
+        fontSize: 17,
       }
     },
     Icon: {
