@@ -80,7 +80,8 @@ const DiningHallChip = (props) => {
     return(
         <Chip 
             title = {props.Name} 
-            titleStyle={{fontSize:15}}
+            titleStyle={{fontSize:15, color: 'white',}}
+            buttonStyle = {{borderWidth: 1, padding: 5,}}
             type = {selected ? 'solid' : 'outline'}
             onPress = {() =>{
                 setSelected(!selected);
@@ -89,51 +90,47 @@ const DiningHallChip = (props) => {
     );
 }
 
-const Favorites = () => {
+const renderFood = ({item}) => (
+    <View
+        style = {{
+            backgroundColor: '#2d2d30',
+            borderRadius: 15, 
+            flexDirection: 'column', 
+            justifyContent: 'space-evenly', 
+            alignItems: 'center', 
+            marginVertical: 10, 
+            marginHorizontal: 5,
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
 
-    const {theme, updateTheme} = useTheme();
-
-    return(
-        <View
+            elevation: 5,
+        }}
+    >
+        <Text h3 h3Style = {{borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5,}}>{item.name}</Text>
+        <Image
+            source = {{uri: item.img}}
+            containerStyle = {{borderRadius: 15,}}
+        />
+        <View 
             style = {{
-                flex: 1,
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 15,
-            }}
-        >
-            <View
-                stlye = {{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'flex-start',
-                    borderRaduis: 15,
-                }}
-            >
-                <Icon/>
-                <Text h3>Favorites</Text>
-            </View>
-        </View>
-    );
-}
-
-const MenuItems = () => {
-
-    const renderFood = ({item}) => (
-        <View
-            style = {{
-                backgroundColor: BCRed,
-                borderRadius: 15, 
-                flexDirection: 'column', 
+                width: 200, 
+                marginVertical: 8, 
+                flexDirection: 'column',  
+                backgroundColor: '#3e3e42', 
                 justifyContent: 'space-evenly', 
                 alignItems: 'center', 
-                marginVertical: 10, 
-                marginHorizontal: 5,
+                borderRadius: 15, 
+                paddingVertical: 5, 
+                paddingHorizontal: 5, 
                 shadowColor: "#000",
                 shadowOffset: {
-                	width: 0,
-                	height: 2,
+                    width: 0,
+                    height: 2,
                 },
                 shadowOpacity: 0.25,
                 shadowRadius: 3.84,
@@ -141,65 +138,40 @@ const MenuItems = () => {
                 elevation: 5,
             }}
         >
-            <Text h3 h3Style = {{borderRadius: 15, paddingVertical: 5, paddingHorizontal: 5,}}>{item.name}</Text>
-            <Image
-                source = {{uri: item.img}}
-                containerStyle = {{borderRadius: 15,}}
-            />
-            <View 
+            <View
                 style = {{
-                    width: 200, 
-                    marginVertical: 8, 
-                    flexDirection: 'column',  
-                    backgroundColor: 'white', 
-                    justifyContent: 'space-evenly', 
-                    alignItems: 'center', 
-                    borderRadius: 15, 
-                    paddingVertical: 5, 
-                    paddingHorizontal: 5, 
-                    shadowColor: "#000",
-                    shadowOffset: {
-                    	width: 0,
-                    	height: 2,
-                    },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-
-                    elevation: 5,
+                    width: 200,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 }}
             >
-                <View
-                    style = {{
-                        width: 200,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <AirbnbRating
-                        size = {20} 
-                        isDisabled = {true}
-                        showRating = {false}
-                        defaultRating = {item.rating}
-                    />
-                    <Text h4 h4Style = {{color: 'black', fontSize: 15,}}>({item.votes})</Text>
-                </View>
-                <View 
-                    style = {{
-                        width: 200,
-                        flexDirection: 'row',
-                        justifyContent: 'space-evenly',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Text h4 h4Style = {{color: 'black'}}>{item.hall}</Text>
-                    <Text h4 h4Style = {{color: 'black'}}>${item.price}</Text>
-                </View>
-                
-                
+                <AirbnbRating
+                    size = {20} 
+                    isDisabled = {true}
+                    showRating = {false}
+                    defaultRating = {item.rating}
+                />
+                <Text h4 h4Style = {{fontSize: 15,}}>({item.votes})</Text>
             </View>
+            <View 
+                style = {{
+                    width: 200,
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',
+                }}
+            >
+                <Text h4>{item.hall}</Text>
+                <Text h4>${item.price}</Text>
+            </View>
+            
+            
         </View>
-    )
+    </View>
+)
+
+const MenuItems = () => {
 
     return(
         <FlatList
@@ -217,7 +189,7 @@ const MainPage = (props) => {
 
     return(
         <SafeAreaProvider>
-            <View style={{flex: 1, backgroundColor: theme.colors.background}}>
+            <View style={{flex: 1, backgroundColor: theme.colors.darkBackground}}>
                 <View>
                     <Header
                         leftComponent= {<Icon name = 'tune' type = 'material'/>}
@@ -261,6 +233,7 @@ const MainPage = (props) => {
                 <Divider/>
                 */}
                 <Text h2 h2Style = {{
+                        color: 'white',
                         marginHorizontal: 10, 
                         marginTop: 10, 
                         shadowColor: "#000",
@@ -274,6 +247,7 @@ const MainPage = (props) => {
                         elevation: 5,}}>Popular</Text>
                 <MenuItems/>
                 <Text h2 h2Style = {{
+                        color: 'white',
                         marginHorizontal: 10, 
                         marginTop: 10, 
                         shadowColor: "#000",
@@ -301,7 +275,7 @@ const MainPage = (props) => {
                     }
                     
                 />
-                <View style = {{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', height: 70, backgroundColor: '#b7b3a5', borderRadius: 5, marginTop: 10,}}>
+                <View style = {{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', height: 70, backgroundColor: theme.colors.surface, borderRadius: 5, marginTop: 10,}}>
                     <Icon
                         name = "home"
                         size = {40}

@@ -13,8 +13,8 @@ const theme = createTheme({
   colors: {
     primary: BCRed,
     secondary: BCGold,
-    darkBackground: '#000000',
-    surface: '#121212',
+    darkBackground: '#1E1E1E',
+    surface: '#2d2d30',
     onPrimary: '#000000',
     onSecondary: '#000000',
   },
@@ -36,7 +36,7 @@ const theme = createTheme({
         fontFamily: 'System',
       },
       h2Style: {
-        color: 'black',
+        color: 'white',
         fontSize: 25
       },
       h3Style: {
@@ -44,7 +44,7 @@ const theme = createTheme({
         fontSize: 20,
       },
       h4Style: {
-        color: 'black',
+        color: 'white',
         fontSize: 17,
       }
     },
