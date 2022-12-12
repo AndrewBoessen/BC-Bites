@@ -3,7 +3,8 @@ import { Text, Skeleton, Image, Header, Icon, Chip, Divider, useTheme, Card, But
 import { View, FlatList, ImageEditor } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient'
+import { LinearGradient } from 'expo-linear-gradient';
+import getData from '../webscraper.js';
 
 const BCRed = '#8a100b';
 const BCGold = '#b29d6c';
@@ -76,13 +77,14 @@ const DATA = [
 
 const DiningHallChip = (props) => {
     const [selected, setSelected] = useState(props.startSelcted);
+    const {theme, updateTheme} = useTheme();
 
     return(
         <Chip 
             title = {props.Name} 
             titleStyle={{fontSize:15, color: 'white',}}
-            buttonStyle = {{borderWidth: 1, padding: 5,}}
-            type = {selected ? 'solid' : 'outline'}
+            buttonStyle = {{padding: 5, backgroundColor: selected ? theme.colors.primary : theme.colors.surface}}
+            type = {'solid'}
             onPress = {() =>{
                 setSelected(!selected);
             }}
@@ -187,21 +189,20 @@ const MenuItems = () => {
 const MainPage = (props) => {
     const {theme, updateTheme} = useTheme();
 
+    getData('Carneys', 'dinner');
+
     return(
         <SafeAreaProvider>
             <View style={{flex: 1, backgroundColor: theme.colors.darkBackground}}>
-                <View>
-                    <Header
-                        leftComponent= {<Icon name = 'tune' type = 'material'/>}
-                        leftContainerStyle = {{justifyContent: 'center'}}
-
-                        centerComponent = {<Text h2 h2Style = {{color: 'white'}}>BC-Bites</Text>}
-                        centerContainerStyle = {{justifyContent: 'center'}}
-
-                        rightComponent= {<Icon name = 'settings' type = 'material'/>}
-                        rightContainerStyle = {{justifyContent: 'center'}}
-                    />
-                </View>
+                <Header
+                containerStyle = {{borderBottomWidth: 0}}
+                    leftComponent= {<Icon name = 'tune' type = 'material'/>}
+                    leftContainerStyle = {{justifyContent: 'center'}}
+                    centerComponent = {<Text h2 h2Style = {{color: 'white'}}>BC-Bites</Text>}
+                    centerContainerStyle = {{justifyContent: 'center'}}
+                    rightComponent= {<Icon name = 'settings' type = 'material'/>}
+                    rightContainerStyle = {{justifyContent: 'center'}}
+                />
                 <View 
                     style = {{
                         flexDirection: 'row', 
@@ -213,7 +214,6 @@ const MainPage = (props) => {
                         },
                         shadowOpacity: 0.25,
                         shadowRadius: 3.84,
-
                         elevation: 5,
                     }}
                 >
@@ -260,21 +260,33 @@ const MainPage = (props) => {
 
                         elevation: 5,}}>Cheapest</Text>
                 <MenuItems/>
-                <Button
-                    title={'Rate Your Meal'}
-                    size={'md'}
-                    titleStyle={{fontSize:25}}
-                    raised={true}
-                    icon = {
-                        <Icon
-                            name = "food"
-                            size = {28}
-                            type = "material-community"
-                            containerStyle = {{marginRight: 10}}
-                        />
-                    }
+                <View
+                    style= {{
+                        shadowColor: "#000",
+                        shadowOffset: {
+                        	width: 0,
+                        	height: 2,
+                        },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 3.84,
+                        elevation: 5,
+                    }}
+                >
+                    <Button
+                        title={'Rate Your Meal'}
+                        size={'md'}
+                        titleStyle={{fontSize:25}}
+                        icon = {
+                            <Icon
+                                name = "food"
+                                size = {28}
+                                type = "material-community"
+                                containerStyle = {{marginRight: 10}}
+                            />
+                        }
                     
-                />
+                    />
+                </View>
                 <View style = {{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', height: 70, backgroundColor: theme.colors.surface, borderRadius: 5, marginTop: 10,}}>
                     <Icon
                         name = "home"
