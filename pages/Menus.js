@@ -4,7 +4,7 @@ import { View, FlatList, ImageEditor } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import getData from '../webscraper.js';
+import getData from '../firebase/webscraper.js';
 
 const BCRed = '#8a100b';
 const BCGold = '#b29d6c';
@@ -16,7 +16,7 @@ const DATA = [
         hall: 'Lower',
         rating: 2,
         votes: 10,
-        price: 10.5,
+        price: 10.99,
         id: 1,
     },
     {
@@ -25,7 +25,7 @@ const DATA = [
         hall: 'Lower',
         rating: 2,
         votes: 10,
-        price: 10,
+        price: 10.5,
         id: 2,
     },
     {
@@ -173,36 +173,129 @@ const renderFood = ({item}) => (
     </View>
 )
 
-const MenuItems = () => {
+const MenuItems = (props) => {
 
     return(
         <FlatList
             contentContainerStyle = {{height: 230}}
             horizontal = {true}
-            data = {DATA}
+            data = {props.data}
             renderItem = {renderFood}
         />
     );
     
 }
 
+const BottomBar = () => {
+    const {theme, updateTheme} = useTheme();
+
+    return(
+        <View 
+            style = {{
+                flexDirection: 'row', 
+                justifyContent: 'space-evenly', 
+                alignItems: 'center', 
+                height: 70, 
+                backgroundColor: theme.colors.surface, 
+                borderRadius: 5, 
+                marginTop: 10,
+            }}
+        >
+            <Icon
+                name = "home"
+                size = {40}
+                type = "material"
+                containerStyle = {{marginRight: 70, marginBottom: 10}}
+            />
+            <Icon
+                name = "star"
+                size = {40}
+                type = "material"
+                containerStyle = {{marginLeft: 70, marginBottom: 10}}
+            />
+        </View>
+    );
+}
+
+const RateButton = () => {
+    return(
+        <View
+            style= {{
+                shadowColor: "#000",
+                shadowOffset: {
+                	width: 0,
+                	height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+                elevation: 5,
+            }}
+        >
+            <Button
+                title={'Rate Your Meal'}
+                size={'md'}
+                titleStyle={{fontSize:25}}
+                icon = {
+                    <Icon
+                        name = "food"
+                        size = {28}
+                        type = "material-community"
+                        containerStyle = {{marginRight: 10}}
+                    />
+                }
+            
+            />
+        </View>
+    );
+}
+
+const SectionTitle = (props) => {
+    return(
+        <Text h2 
+            h2Style = {{
+                color: 'white',
+                marginHorizontal: 10, 
+                marginTop: 10, 
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+                elevation: 5,
+            }}
+        >
+            {props.name}
+        </Text>
+    );
+}
+
+const AppHeader = () => {
+    return(
+        <Header
+            containerStyle = {{borderBottomWidth: 0}}
+            leftComponent= {<Icon name = 'tune' type = 'material'/>}
+            leftContainerStyle = {{justifyContent: 'center'}}
+            centerComponent = {<Text h2 h2Style = {{color: 'white'}}>BC Bites</Text>}
+            centerContainerStyle = {{justifyContent: 'center'}}
+            rightComponent= {<Icon name = 'settings' type = 'material'/>}
+            rightContainerStyle = {{justifyContent: 'center'}}
+        />
+    );
+}
+
 const MainPage = (props) => {
     const {theme, updateTheme} = useTheme();
 
-    getData('Carneys', 'dinner');
+    (async () => {
+        console.log(await getData())
+    })()
 
     return(
         <SafeAreaProvider>
             <View style={{flex: 1, backgroundColor: theme.colors.darkBackground}}>
-                <Header
-                containerStyle = {{borderBottomWidth: 0}}
-                    leftComponent= {<Icon name = 'tune' type = 'material'/>}
-                    leftContainerStyle = {{justifyContent: 'center'}}
-                    centerComponent = {<Text h2 h2Style = {{color: 'white'}}>BC-Bites</Text>}
-                    centerContainerStyle = {{justifyContent: 'center'}}
-                    rightComponent= {<Icon name = 'settings' type = 'material'/>}
-                    rightContainerStyle = {{justifyContent: 'center'}}
-                />
+                <AppHeader/>
                 <View 
                     style = {{
                         flexDirection: 'row', 
@@ -221,86 +314,20 @@ const MainPage = (props) => {
                     <DiningHallChip Name = {"Carney's"}/>
                     <DiningHallChip Name = {"Stuart"}/>
                 </View>
-                {/*ADD USER FAVORITE ITEMS AVAILIBEL TODAY */}
-                {/*
-                <Divider/>
                 
-                <TopChoice
-                    name = {'BC Burger'}
-                    img = {'https://via.placeholder.com/200x100'}
+                <SectionTitle 
+                    name = {"Popular"}
                 />
-                
-                <Divider/>
-                */}
-                <Text h2 h2Style = {{
-                        color: 'white',
-                        marginHorizontal: 10, 
-                        marginTop: 10, 
-                        shadowColor: "#000",
-                        shadowOffset: {
-                        	width: 0,
-                        	height: 2,
-                        },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 3.84,
+                <MenuItems data = {DATA}/>
 
-                        elevation: 5,}}>Popular</Text>
-                <MenuItems/>
-                <Text h2 h2Style = {{
-                        color: 'white',
-                        marginHorizontal: 10, 
-                        marginTop: 10, 
-                        shadowColor: "#000",
-                        shadowOffset: {
-                        	width: 0,
-                        	height: 2,
-                        },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 3.84,
+                <SectionTitle 
+                    name = {"Cheapest"}
+                />
+                <MenuItems data = {DATA}/>
 
-                        elevation: 5,}}>Cheapest</Text>
-                <MenuItems/>
-                <View
-                    style= {{
-                        shadowColor: "#000",
-                        shadowOffset: {
-                        	width: 0,
-                        	height: 2,
-                        },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 3.84,
-                        elevation: 5,
-                    }}
-                >
-                    <Button
-                        title={'Rate Your Meal'}
-                        size={'md'}
-                        titleStyle={{fontSize:25}}
-                        icon = {
-                            <Icon
-                                name = "food"
-                                size = {28}
-                                type = "material-community"
-                                containerStyle = {{marginRight: 10}}
-                            />
-                        }
-                    
-                    />
-                </View>
-                <View style = {{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', height: 70, backgroundColor: theme.colors.surface, borderRadius: 5, marginTop: 10,}}>
-                    <Icon
-                        name = "home"
-                        size = {40}
-                        type = "material"
-                        containerStyle = {{marginRight: 70, marginBottom: 10}}
-                    />
-                    <Icon
-                        name = "star"
-                        size = {40}
-                        type = "material"
-                        containerStyle = {{marginLeft: 70, marginBottom: 10}}
-                    />
-                </View>
+                <RateButton/>
+
+                <BottomBar/>
             </View>
         </SafeAreaProvider>
     );
