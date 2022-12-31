@@ -23,5 +23,14 @@ const getData = async () => {
   return menuItems;
 }
 
+const getImage = async (query) => {
+  try{
+    
+  } catch (error) {
+    console.error(error);
+  }
+
+}
+
 export default getData;
 

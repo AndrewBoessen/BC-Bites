@@ -289,8 +289,8 @@ const MainPage = (props) => {
     const {theme, updateTheme} = useTheme();
 
     (async () => {
-        console.log(await getData())
-    })()
+        console.log(await getData());
+    })();
 
     return(
         <SafeAreaProvider>
